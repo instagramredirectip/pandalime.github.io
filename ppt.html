@@ -1,17 +1,292 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <title>
-    PPT LINK
-  </title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Presentation Hub</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            background-size: 400% 400%;
+            animation: gradientShift 8s ease infinite;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow-x: hidden;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .container {
+            max-width: 800px;
+            width: 90%;
+            animation: slideInDown 0.8s ease-out;
+        }
+
+        @keyframes slideInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 60px;
+            animation: fadeIn 1s ease-out 0.3s both;
+        }
+
+        .header h1 {
+            font-size: 3.5em;
+            color: white;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.1em;
+            letter-spacing: 1px;
+        }
+
+        .links-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 25px;
+            perspective: 1000px;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        .link-card {
+            position: relative;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 40px;
+            border-radius: 20px;
+            text-decoration: none;
+            color: #333;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+            cursor: pointer;
+            animation: scaleIn 0.6s ease-out both;
+        }
+
+        .link-card:nth-child(1) {
+            animation-delay: 0.4s;
+        }
+
+        .link-card:nth-child(2) {
+            animation-delay: 0.5s;
+        }
+
+        .link-card:nth-child(3) {
+            animation-delay: 0.6s;
+        }
+
+        @keyframes scaleIn {
+            from {
+                opacity: 0;
+                transform: scale(0.8) rotateX(-20deg);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) rotateX(0);
+            }
+        }
+
+        .link-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .link-card:hover::before {
+            left: 100%;
+        }
+
+        .link-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            z-index: -1;
+        }
+
+        .link-card:hover::after {
+            opacity: 0.1;
+        }
+
+        .link-card:hover {
+            transform: translateY(-15px) rotateX(5deg);
+            box-shadow: 0 40px 80px rgba(102, 126, 234, 0.4);
+        }
+
+        .link-content {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .link-icon {
+            font-size: 3em;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .link-card:nth-child(1) .link-icon {
+            animation-delay: 0s;
+        }
+
+        .link-card:nth-child(2) .link-icon {
+            animation-delay: 0.5s;
+        }
+
+        .link-card:nth-child(3) .link-icon {
+            animation-delay: 1s;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .link-text h2 {
+            font-size: 2em;
+            margin-bottom: 8px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            transition: all 0.3s ease;
+        }
+
+        .link-card:hover .link-text h2 {
+            transform: translateX(10px);
+        }
+
+        .link-text p {
+            color: #666;
+            font-size: 0.95em;
+            opacity: 0.8;
+            transition: opacity 0.3s ease;
+        }
+
+        .link-card:hover .link-text p {
+            opacity: 1;
+        }
+
+        .arrow {
+            margin-left: auto;
+            font-size: 2em;
+            transition: transform 0.3s ease;
+            color: #667eea;
+        }
+
+        .link-card:hover .arrow {
+            transform: translateX(10px);
+        }
+
+        @media (max-width: 600px) {
+            .header h1 {
+                font-size: 2.5em;
+            }
+
+            .link-card {
+                padding: 30px;
+            }
+
+            .link-text h2 {
+                font-size: 1.5em;
+            }
+
+            .link-icon {
+                font-size: 2.5em;
+            }
+        }
+    </style>
 </head>
-  <body>
-    <a href="https://docs.google.com/presentation/d/1yeyg7K4_1CwWUhFNFC0AmwEIVkDrX4NvSc6mrxC2VZs/edit?usp=sharing">
-    <h2>Open Presentation 👉</h2></a>
-    <br>
- <a href="https://www.pi.inc/docs/382345275898481?share_token=NCGHI5JVXTDIQ">
-    <h2>Questions PPT 👉</h2></a>
-    <br>
-     <a href="https://generated-image.s3.ap-south-1.amazonaws.com/pdfs/67c3aff9-f2f1-4178-beef-351f13f13c8b.pdf">
-    <h2>Questions PDF 👉</h2></a>
-  </body>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📊 Presentation Resources</h1>
+            <p>Access all presentation resources</p>
+        </div>
+
+        <div class="links-grid">
+            <a href="https://docs.google.com/presentation/d/1yeyg7K4_1CwWUhFNFC0AmwEIVkDrX4NvSc6mrxC2VZs/edit?usp=sharing" class="link-card">
+                <div class="link-content">
+                    <div class="link-icon">◈</div>
+                    <div class="link-text">
+                        <h2>Open Presentation</h2>
+                        <p>View and edit your main presentation</p>
+                    </div>
+                    <div class="arrow">→</div>
+                </div>
+            </a>
+
+            <a href="https://www.pi.inc/docs/382345275898481?share_token=NCGHI5JVXTDIQ" class="link-card">
+                <div class="link-content">
+                    <div class="link-icon">◈</div>
+                    <div class="link-text">
+                        <h2>Questions PPT</h2>
+                        <p>Review Q&A presentation slides</p>
+                    </div>
+                    <div class="arrow">→</div>
+                </div>
+            </a>
+
+            <a href="https://generated-image.s3.ap-south-1.amazonaws.com/pdfs/67c3aff9-f2f1-4178-beef-351f13f13c8b.pdf" class="link-card">
+                <div class="link-content">
+                    <div class="link-icon">◈</div>
+                    <div class="link-text">
+                        <h2>Questions PDF</h2>
+                        <p>Download Q&A in PDF format</p>
+                    </div>
+                    <div class="arrow">→</div>
+                </div>
+            </a>
+        </div>
+    </div>
+</body>
 </html>
